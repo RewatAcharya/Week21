@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Week21.Application;
 using Week21.Domain;
 
@@ -14,6 +15,7 @@ namespace Week21.Presentation.Controllers
             _studentService = studentService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost, Route("AddStudent")]
         public async Task<IActionResult> AddStudent(Student
             std)
@@ -33,6 +35,7 @@ namespace Week21.Presentation.Controllers
             return Ok(result);
         }
 
+        //[Authorize(Roles = "Admin, User")]
         [HttpGet, Route("GetStudents")]
         public async Task<IActionResult> GetAllStudent()
         {
